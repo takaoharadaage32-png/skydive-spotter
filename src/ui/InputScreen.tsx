@@ -375,6 +375,11 @@ export default function InputScreen({ state, onGoToResult }: Props) {
             >
               ×
             </button>
+            {g.discipline === 'tandem' && (
+              <span className="helper-text" style={{ gridColumn: '2 / -1' }}>
+                タンデムは人数に関わらずソロ（1,000ft）扱いで間隔を計算します
+              </span>
+            )}
           </div>
         ))}
         <button

@@ -23,6 +23,11 @@ describe('requiredSeparationFt', () => {
     const bigger = requiredSeparationFt(6);
     expect(bigger).toBeGreaterThan(base);
   });
+
+  it('treats tandem as solo regardless of headcount (instructor+passenger fall as one unit)', () => {
+    expect(requiredSeparationFt(2, 'tandem')).toBe(1000);
+    expect(requiredSeparationFt(6, 'tandem')).toBe(1000);
+  });
 });
 
 describe('sortGroupsStandardOrder', () => {

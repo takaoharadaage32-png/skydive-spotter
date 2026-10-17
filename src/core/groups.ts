@@ -61,8 +61,13 @@ export function sortGroupsStandardOrder(groups: GroupInput[]): GroupInput[] {
   });
 }
 
-/** グループに必要なセパレーション距離（ft）。ソロ1,000ft、小グループ1,500ft、大グループはそれ以上。 */
-export function requiredSeparationFt(headcount: number): number {
+/**
+ * グループに必要なセパレーション距離（ft）。ソロ1,000ft、小グループ1,500ft、大グループはそれ以上。
+ * タンデムはインストラクターと乗客がハーネスで連結されて1つの塊として落下するため、
+ * 人数（常に2人）に関わらずソロ扱いとする。
+ */
+export function requiredSeparationFt(headcount: number, discipline?: Discipline): number {
+  if (discipline === 'tandem') return SEPARATION.soloFt;
   if (headcount <= 1) return SEPARATION.soloFt;
   if (headcount <= SEPARATION.smallGroupMaxSize) return SEPARATION.smallGroupFt;
   return (
@@ -96,7 +101,7 @@ export function computeGroupExits(
   return groups.map((g, i) => {
     let intervalS = 0;
     if (i > 0) {
-      const requiredM = ftToM(requiredSeparationFt(g.headcount));
+      const requiredM = ftToM(requiredSeparationFt(g.headcount, g.discipline));
       intervalS = Math.ceil(requiredM / safeGs);
       cumulativeM += intervalS * safeGs;
     }
