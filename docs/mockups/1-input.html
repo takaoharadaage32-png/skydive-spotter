@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Skydive Spotter 入力</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans+JP:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#15191E}a:hover{color:#000}
+input{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 1200px; box-sizing: border-box; background: #F3F4F1; color: #15191E; font-family: 'IBM Plex Sans JP', system-ui, sans-serif; display: flex; flex-direction: column">
+<header style="padding: 20px 20px 12px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #5A626B">SKYDIVE SPOTTER</div>
+<h1 style="margin: 0; font-size: 24px; font-weight: 700">ジャンプ設定</h1>
+</header>
+<main style="flex: 1; padding: 0 16px; display: flex; flex-direction: column; gap: 14px">
+
+<section style="background: #FFFFFF; border: 1px solid #D9DCD6; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A626B">ドロップゾーン</h2>
+<button style="border: 1px solid #D9DCD6; background: #FFFFFF; border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 13px; color: #15191E; min-height: 32px">プリセット切替</button>
+</div>
+<div style="font-size: 18px; font-weight: 700">[DZ名]</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">ターゲット緯度・経度<input value="35.xxxx, 139.xxxx" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #15191E; background: #F8F9F6"></label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">DZ標高 (m MSL)<input value="[標高]" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #15191E; background: #F8F9F6"></label>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #D9DCD6; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A626B">高度と位置</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">Exit高度 (ft AGL)<input value="13,000" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 12px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; color: #15191E; background: #F8F9F6"></label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">オープン高度 (ft AGL)<input value="3,000" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 12px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; color: #15191E; background: #F8F9F6"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-size: 12px; color: #5A626B">オープン位置（ターゲットから）</span>
+<span style="font-size: 11px; font-weight: 700; color: {{accent}}">自動提案</span>
+</div>
+<div style="display: flex; gap: 10px; align-items: center; border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px 12px; background: #F8F9F6">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600">278°M</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600">830 m</span>
+<span style="margin-left: auto; font-size: 12px; color: #5A626B">キャノピードリフトの逆方向</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-size: 12px; color: #5A626B">ジャンプラン方向（磁方位・偏角 8°W）</span>
+<span style="font-size: 11px; font-weight: 700; color: {{accent}}">自動提案</span>
+</div>
+<div style="display: flex; gap: 12px; align-items: center; border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px 12px; background: #F8F9F6">
+<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#9AA1A8" stroke-width="1.25"></circle><path d="M22 14H6M10 10L6 14L10 18" fill="none" stroke="#15191E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600">278°M</span>
+<span style="margin-left: auto; font-size: 12px; color: #5A626B">Exit高度の風に正対</span>
+</div>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #D9DCD6; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A626B">種目と機体</h2>
+<div role="group" aria-label="種目" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+<button style="min-height: 44px; border-radius: 10px; border: 2px solid #15191E; background: #15191E; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 700">ベリー</button>
+<button style="min-height: 44px; border-radius: 10px; border: 1px solid #D9DCD6; background: #FFFFFF; color: #15191E; font: inherit; font-size: 13px">FF</button>
+<button style="min-height: 44px; border-radius: 10px; border: 1px solid #D9DCD6; background: #FFFFFF; color: #15191E; font: inherit; font-size: 13px">AFF</button>
+<button style="min-height: 44px; border-radius: 10px; border: 1px solid #D9DCD6; background: #FFFFFF; color: #15191E; font: inherit; font-size: 13px">タンデム</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">キャノピー降下率 (ft/分)<input value="1,000" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #15191E; background: #F8F9F6"></label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5A626B">ジャンプラン対気速度 (kt)<input value="85" style="border: 1px solid #D9DCD6; border-radius: 10px; padding: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #15191E; background: #F8F9F6"></label>
+</div>
+<a href="Wind.dc.html" style="font-size: 13px; color: #15191E">グループ構成：4組 ›</a>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #D9DCD6; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A626B">表示単位</h2>
+<div style="display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 8px 10px; align-items: center">
+<span style="font-size: 13px">高度</span>
+<div role="group" aria-label="高度の単位" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #E4E6E1; border-radius: 10px; padding: 3px"><button style="min-height: 36px; border: 0; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: 13px; font-weight: 700; color: #15191E">ft</button><button style="min-height: 36px; border: 0; border-radius: 8px; background: transparent; font: inherit; font-size: 13px; color: #3E454C">m</button></div>
+<span style="font-size: 13px">距離</span>
+<div role="group" aria-label="距離の単位" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #E4E6E1; border-radius: 10px; padding: 3px"><button style="min-height: 36px; border: 0; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: 13px; font-weight: 700; color: #15191E">m</button><button style="min-height: 36px; border: 0; border-radius: 8px; background: transparent; font: inherit; font-size: 13px; color: #3E454C">マイル</button></div>
+<span style="font-size: 13px">風速</span>
+<div role="group" aria-label="風速の単位" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #E4E6E1; border-radius: 10px; padding: 3px"><button style="min-height: 36px; border: 0; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: 13px; font-weight: 700; color: #15191E">kt</button><button style="min-height: 36px; border: 0; border-radius: 8px; background: transparent; font: inherit; font-size: 13px; color: #3E454C">m/s</button></div>
+</div>
+<span style="font-size: 12px; color: #5A626B">方位は磁方位で表示（偏角はWMMで自動計算）</span>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #D9DCD6; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A626B">上空の風</h2>
+<span style="font-size: 12px; color: #5A626B">ジャンプ予定 10/18 10:00</span>
+</div>
+<div style="display: flex; gap: 10px; align-items: center">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #15803D" aria-hidden="true"></span>
+<span style="font-size: 13px">JMA MSM · 9:12 取得 · オフライン保存済み</span>
+</div>
+<button style="min-height: 44px; border-radius: 12px; border: 1px solid #15191E; background: #FFFFFF; color: #15191E; font: inherit; font-size: 15px; font-weight: 500">風を再取得</button>
+</section>
+
+</main>
+<div style="padding: 14px 16px 10px">
+<a href="Result.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 54px; border-radius: 14px; background: {{accent}}; color: #FFFFFF; font-size: 17px; font-weight: 700; text-decoration: none">計算する</a>
+</div>
+<nav aria-label="タブ" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #D9DCD6; background: #FFFFFF; padding: 6px 8px 22px">
+<a href="Main.dc.html" aria-current="page" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; font-weight: 700; color: #15191E; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13" fill="none" stroke="#15191E" stroke-width="2" stroke-linecap="round"></path></svg>入力</a>
+<a href="Result.dc.html" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: #5A626B; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="#5A626B" stroke-width="1.75"></circle><circle cx="12" cy="12" r="2.5" fill="#5A626B"></circle></svg>結果</a>
+<a href="Wind.dc.html" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: #5A626B; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h12a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3" fill="none" stroke="#5A626B" stroke-width="1.75" stroke-linecap="round"></path></svg>風</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C2410C","options":["#C2410C","#1D4ED8","#15803D","#15191E"]},"$preview":{"width":390,"height":1200}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C2410C' };
+}
+}
+</script>
+</body>
+</html>
