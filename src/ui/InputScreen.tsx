@@ -5,6 +5,7 @@ import { vectorToBearingDistance } from '../core/vector';
 import { ftToM, mToFt } from '../core/units';
 import type { SpotterState } from './useSpotterState';
 import { newGroupId, type FallModelKey } from './types';
+import NumberField from './NumberField';
 
 const FALL_MODEL_LABELS: { key: FallModelKey; short: string }[] = [
   { key: 'belly', short: 'ベリー' },
@@ -59,38 +60,18 @@ export default function InputScreen({ state, onGoToResult }: Props) {
         <div className="field-grid">
           <label className="field">
             ターゲット緯度
-            <input
-              type="number"
-              step="0.0001"
-              value={inputs.targetLat}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ targetLat: v });
-              }}
-            />
+            <NumberField step="0.0001" value={inputs.targetLat} onChange={(v) => setInputs({ targetLat: v })} />
           </label>
           <label className="field">
             ターゲット経度
-            <input
-              type="number"
-              step="0.0001"
-              value={inputs.targetLon}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ targetLon: v });
-              }}
-            />
+            <NumberField step="0.0001" value={inputs.targetLon} onChange={(v) => setInputs({ targetLon: v })} />
           </label>
         </div>
         <label className="field">
           DZ標高 (m MSL){inputs.dzElevationManual ? '（手動）' : '（open-meteoから自動）'}
-          <input
-            type="number"
+          <NumberField
             value={Math.round(inputs.dzElevationM)}
-            onChange={(e) => {
-              const v = e.target.valueAsNumber;
-              if (!Number.isNaN(v)) setInputs({ dzElevationM: v, dzElevationManual: true });
-            }}
+            onChange={(v) => setInputs({ dzElevationM: v, dzElevationManual: true })}
           />
         </label>
       </section>
@@ -100,26 +81,18 @@ export default function InputScreen({ state, onGoToResult }: Props) {
         <div className="field-grid">
           <label className="field">
             Exit高度 ({altUnit === 'm' ? 'm' : 'ft'} AGL)
-            <input
+            <NumberField
               className="field--big"
-              type="number"
               value={toDisplayAlt(inputs.exitAltFt)}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ exitAltFt: fromDisplayAlt(v) });
-              }}
+              onChange={(v) => setInputs({ exitAltFt: fromDisplayAlt(v) })}
             />
           </label>
           <label className="field">
             オープン高度 ({altUnit === 'm' ? 'm' : 'ft'} AGL)
-            <input
+            <NumberField
               className="field--big"
-              type="number"
               value={toDisplayAlt(inputs.openAltFt)}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ openAltFt: fromDisplayAlt(v) });
-              }}
+              onChange={(v) => setInputs({ openAltFt: fromDisplayAlt(v) })}
             />
           </label>
         </div>
@@ -138,23 +111,19 @@ export default function InputScreen({ state, onGoToResult }: Props) {
           <div className="value-row">
             {inputs.openPositionManual ? (
               <>
-                <input
-                  type="number"
+                <NumberField
                   value={Math.round(inputs.openPositionManual.bearingMagDeg)}
-                  onChange={(e) => {
-                    const v = e.target.valueAsNumber;
-                    if (!Number.isNaN(v) && inputs.openPositionManual) {
+                  onChange={(v) => {
+                    if (inputs.openPositionManual) {
                       setInputs({ openPositionManual: { ...inputs.openPositionManual, bearingMagDeg: v } });
                     }
                   }}
                 />
                 <span className="value-row__mono">°M</span>
-                <input
-                  type="number"
+                <NumberField
                   value={Math.round(inputs.openPositionManual.distanceM)}
-                  onChange={(e) => {
-                    const v = e.target.valueAsNumber;
-                    if (!Number.isNaN(v) && inputs.openPositionManual) {
+                  onChange={(v) => {
+                    if (inputs.openPositionManual) {
                       setInputs({ openPositionManual: { ...inputs.openPositionManual, distanceM: v } });
                     }
                   }}
@@ -209,13 +178,9 @@ export default function InputScreen({ state, onGoToResult }: Props) {
               </>
             ) : (
               <>
-                <input
-                  type="number"
+                <NumberField
                   value={Math.round(inputs.jumpRunManualMagDeg ?? 0)}
-                  onChange={(e) => {
-                    const v = e.target.valueAsNumber;
-                    if (!Number.isNaN(v)) setInputs({ jumpRunManualMagDeg: v });
-                  }}
+                  onChange={(v) => setInputs({ jumpRunManualMagDeg: v })}
                 />
                 <span className="value-row__mono">°M</span>
                 <button type="button" className="value-row__note" onClick={() => setInputs({ jumpRunManualMagDeg: null })}>
@@ -244,25 +209,11 @@ export default function InputScreen({ state, onGoToResult }: Props) {
         <div className="field-grid">
           <label className="field">
             キャノピー降下率 (ft/分)
-            <input
-              type="number"
-              value={inputs.descentRateFtPerMin}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ descentRateFtPerMin: v });
-              }}
-            />
+            <NumberField value={inputs.descentRateFtPerMin} onChange={(v) => setInputs({ descentRateFtPerMin: v })} />
           </label>
           <label className="field">
             ジャンプラン対気速度 (kt)
-            <input
-              type="number"
-              value={inputs.tasKt}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v)) setInputs({ tasKt: v });
-              }}
-            />
+            <NumberField value={inputs.tasKt} onChange={(v) => setInputs({ tasKt: v })} />
           </label>
         </div>
         <span className="helper-text">{FALL_MODELS[inputs.fallModelKey].name} を使用</span>
@@ -320,18 +271,14 @@ export default function InputScreen({ state, onGoToResult }: Props) {
                 </option>
               ))}
             </select>
-            <input
-              type="number"
+            <NumberField
               min={1}
               value={g.headcount}
-              onChange={(e) => {
-                const v = e.target.valueAsNumber;
-                if (!Number.isNaN(v) && v >= 1) {
-                  setGroups((groups) =>
-                    groups.map((x) => (x.id === g.id ? { ...x, headcount: v, label: groupLabel(x.discipline, v) } : x)),
-                  );
-                }
-              }}
+              onChange={(v) =>
+                setGroups((groups) =>
+                  groups.map((x) => (x.id === g.id ? { ...x, headcount: v, label: groupLabel(x.discipline, v) } : x)),
+                )
+              }
               style={{ border: '1px solid var(--border)', borderRadius: 8, padding: '6px 4px', fontSize: 13, width: '100%' }}
             />
             <div style={{ display: 'flex', gap: 2 }}>
