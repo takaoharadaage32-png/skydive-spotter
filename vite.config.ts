@@ -2,8 +2,13 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// GitHub Pages（プロジェクトページ）は /<リポジトリ名>/ 配下で配信されるため、
+// アセットのパスとPWAマニフェストをそのサブパスに合わせる。
+const BASE_PATH = '/skydive-spotter/'
+
 // https://vite.dev/config/
 export default defineConfig({
+  base: BASE_PATH,
   plugins: [
     react(),
     VitePWA({
@@ -14,8 +19,8 @@ export default defineConfig({
         short_name: 'Skydive Spotter',
         description: 'open-meteoの上空風予報からExit地点（グリーンライト点）を計算するスカイダイビング用PWA',
         lang: 'ja',
-        start_url: '/',
-        scope: '/',
+        start_url: BASE_PATH,
+        scope: BASE_PATH,
         display: 'standalone',
         background_color: '#F3F4F1',
         theme_color: '#15191E',
