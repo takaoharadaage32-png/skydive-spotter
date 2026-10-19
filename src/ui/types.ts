@@ -57,8 +57,8 @@ export interface WindState {
 
 export function defaultInputs(): Inputs {
   return {
-    targetLat: 35.3,
-    targetLon: 139.4,
+    targetLat: 36.121676,
+    targetLon: 139.400339,
     dzElevationM: 0,
     dzElevationManual: false,
     exitAltFt: 13000,
