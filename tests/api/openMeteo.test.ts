@@ -39,6 +39,13 @@ describe('selectNearestHourIndex', () => {
   it('throws for an empty time list', () => {
     expect(() => selectNearestHourIndex([], new Date())).toThrow();
   });
+
+  // 実機で、無効な日時（空文字など）を渡すと NaN 同士の比較で常にfalseになり、
+  // どのインデックスも「better」と判定されず無言で先頭（0時）が返っていたバグの回帰テスト
+  it('throws for an invalid Date instead of silently returning index 0', () => {
+    expect(() => selectNearestHourIndex(times, new Date('invalid'))).toThrow();
+    expect(() => selectNearestHourIndex(times, new Date(''))).toThrow();
+  });
 });
 
 describe('parseWindPoints', () => {

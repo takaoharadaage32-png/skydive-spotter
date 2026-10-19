@@ -38,7 +38,7 @@ export const DEFAULT_DISPLAY_UNITS: DisplayUnits = {
   speed: 'kt',
 };
 
-function nextFullHourIso(): string {
+export function nextFullHourIso(): string {
   const d = new Date();
   d.setMinutes(0, 0, 0);
   d.setHours(d.getHours() + 1);

@@ -374,7 +374,11 @@ export default function InputScreen({ state, onGoToResult }: Props) {
             <input
               type="datetime-local"
               value={inputs.jumpTimeIso}
-              onChange={(e) => setInputs({ jumpTimeIso: e.target.value })}
+              onChange={(e) => {
+                // 編集中に一瞬空になることはあるが、確定した空文字は保存しない
+                // （不正な日時のまま「風を取得」すると時刻の対応付けが壊れるため）
+                if (e.target.value !== '') setInputs({ jumpTimeIso: e.target.value });
+              }}
               style={{ border: '1px solid var(--border)', borderRadius: 8, padding: '4px 6px' }}
             />
           </label>

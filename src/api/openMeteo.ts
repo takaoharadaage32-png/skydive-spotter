@@ -44,6 +44,11 @@ export function selectNearestHourIndex(times: string[], targetTime: Date): numbe
   if (times.length === 0) {
     throw new Error('selectNearestHourIndex: times must not be empty');
   }
+  if (Number.isNaN(targetTime.getTime())) {
+    // 不正な日時を渡すと NaN 同士の比較になり、どのインデックスも「better」と判定されず
+    // 無言で先頭（0時）が返ってしまうため、ここで必ず検出してエラーにする。
+    throw new Error('selectNearestHourIndex: targetTime is an invalid Date');
+  }
   let bestIndex = 0;
   let bestDiffMs = Infinity;
   times.forEach((t, i) => {

@@ -17,7 +17,14 @@ import {
 import { vectorAt } from '../core/windProfile';
 import { loadSettings, saveSettings } from '../storage/settings';
 import { loadWindProfile, saveWindProfile } from '../storage/windCache';
-import { DEFAULT_DISPLAY_UNITS, defaultInputs, type DisplayUnits, type Inputs, type WindState } from './types';
+import {
+  DEFAULT_DISPLAY_UNITS,
+  defaultInputs,
+  nextFullHourIso,
+  type DisplayUnits,
+  type Inputs,
+  type WindState,
+} from './types';
 
 export function useSpotterState() {
   const stored = useMemo(() => loadSettings(), []);
@@ -66,10 +73,18 @@ export function useSpotterState() {
   const fetchWind = useCallback(async () => {
     setWind({ status: 'loading' });
     try {
+      let jumpTime = new Date(inputs.jumpTimeIso);
+      if (Number.isNaN(jumpTime.getTime())) {
+        // 日時欄が空・不正な値だと「最も近い時刻」の判定が壊れて先頭（0時）のデータを
+        // 無言で返してしまうため、ここで検出して「今」に自己修復する（表示欄も直す）。
+        const fallbackIso = nextFullHourIso();
+        setInputs({ jumpTimeIso: fallbackIso });
+        jumpTime = new Date(fallbackIso);
+      }
       const profile = await fetchWindProfile({
         latitude: inputs.targetLat,
         longitude: inputs.targetLon,
-        jumpTime: new Date(inputs.jumpTimeIso),
+        jumpTime,
         exitAltFt: inputs.exitAltFt,
         dzElevationM: inputs.dzElevationManual ? inputs.dzElevationM : undefined,
       });
