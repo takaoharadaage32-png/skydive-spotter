@@ -24,6 +24,9 @@ function App() {
       )}
       {tab === 'result' && <ResultScreen state={state} />}
       {tab === 'wind' && <WindScreen state={state} />}
+      <div className="build-info">
+        build {__APP_VERSION__} · {new Date(__BUILD_TIME__).toLocaleString('ja-JP')}
+      </div>
       <TabNav active={tab} onChange={setTab} />
     </div>
   );

@@ -345,6 +345,16 @@ button {
   color: var(--text-muted);
 }
 
+.build-info {
+  text-align: center;
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--text-muted);
+  opacity: 0.6;
+  padding: 4px 0 0;
+  background: #ffffff;
+}
+
 /* タブナビゲーション */
 .tab-nav {
   display: grid;

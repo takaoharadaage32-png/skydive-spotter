@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -6,9 +7,28 @@ import { VitePWA } from 'vite-plugin-pwa'
 // アセットのパスとPWAマニフェストをそのサブパスに合わせる。
 const BASE_PATH = '/skydive-spotter/'
 
+// 画面にビルド番号を出すための情報（新しいバージョンかどうかを見分けられるように）。
+// GitHub Actions では GITHUB_SHA が常にあるのでそれを優先し、ローカルビルドでは
+// git コマンドにフォールバックする。
+function getCommitSha(): string {
+  const fromEnv = process.env.GITHUB_SHA;
+  if (fromEnv) return fromEnv.slice(0, 7);
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim();
+  } catch {
+    return 'dev';
+  }
+}
+const APP_VERSION = getCommitSha();
+const BUILD_TIME = new Date().toISOString();
+
 // https://vite.dev/config/
 export default defineConfig({
   base: BASE_PATH,
+  define: {
+    __APP_VERSION__: JSON.stringify(APP_VERSION),
+    __BUILD_TIME__: JSON.stringify(BUILD_TIME),
+  },
   plugins: [
     react(),
     VitePWA({
